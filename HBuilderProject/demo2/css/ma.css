@@ -1,0 +1,17 @@
+div{
+	background-color: yellowgreen;
+	width: 200px;
+	height: 200px;
+	border: 20px solid red;
+	padding-left: 20px;
+	padding-top: 100px;
+	margin-left: 100px;
+	margin-top: 200px;
+	
+}
+p{
+	visibility:hidden;
+}
+li{
+	display: inline;
+}

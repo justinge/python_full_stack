@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+	    <script>
+	    	$(function(){
+	    		
+	    		$("#btns").click(function(){
+	    			$("#ols").append("<li>追加的列表</li>")
+	    		});
+	    		$("#btnd").click(function(){
+	    			$("#shan").remove()
+	    		});
+	    	})
+	    	
+	    </script>
+	</head>
+	<body>
+		<input type="button" id="btns" value="添加" />
+		<input type="button" id="btnd"  value="删除"/>
+		<ol id="ols">
+			<li>1</li>
+			<li>2</li>
+			<li id="shan">3</li>
+		</ol>
+	</body>
+</html>

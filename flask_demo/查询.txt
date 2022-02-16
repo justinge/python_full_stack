@@ -1,0 +1,199 @@
+In [1]: from dbdemo import *
+
+In [2]: Role.query.all()
+Out[2]: [Role object:name=admin, Role object:name=test]
+
+In [3]: li=Role.query.all()
+
+In [4]: li
+Out[4]: [Role object:name=admin, Role object:name=test]
+
+In [5]: li[0]
+Out[5]: Role object:name=admin
+
+In [6]: type(li[0])
+Out[6]: dbdemo.Role
+
+In [7]: r=li[0]
+
+In [8]: r.name
+Out[8]: 'admin'
+
+In [9]: r.id
+Out[9]: 1
+
+In [10]: Role.query.first()
+Out[10]: Role object:name=admin
+
+In [11]: r=Role.query.get(2)
+
+In [12]: r
+Out[12]: Role object:name=test
+
+In [13]: r.name
+Out[13]: 'test'
+
+In [14]: db.session.query(Role).all()
+Out[14]: [Role object:name=admin, Role object:name=test]
+
+In [15]: db.session.query(Role).get(2)
+Out[15]: Role object:name=test
+
+In [16]: db.session.query(Role).first()
+Out[16]: Role object:name=admin
+
+In [17]: User.query.filter_by(name="lisi")
+Out[17]: <flask_sqlalchemy.BaseQuery at 0x1bff1f04080>
+
+In [18]: User.query.filter_by(name="lisi").all()
+Out[18]: [User object:name=lisi]
+
+In [19]: User.query.filter_by(name="lisi").first()
+Out[19]: User object:name=lisi
+
+In [20]: user=User.query.filter_by(name="lisi").first()
+
+In [21]: user.name
+Out[21]: 'lisi'
+
+In [22]: user.phone
+Out[22]: '12444'
+
+In [23]: user.password
+Out[23]: 'qw'
+
+In [24]: user=User.query.filter_by(name="lisi",role_id=1).first()
+
+In [25]: type(user)
+Out[25]: NoneType
+
+In [26]: User.query.filter(User.name.endswith('s')).all
+Out[26]: <bound method Query.all of <flask_sqlalchemy.BaseQuery object at 0x000001BFF1F33208>>
+
+In [27]: User.query.filter(User.name.endswith('s')).all()
+Out[27]: [User object:name=zs]
+
+In [28]: User.query.filter(User.name!="zs").all()
+Out[28]: [User object:name=lisi, User object:name=chen, User object:name=wang]
+
+In [29]: from sqlalchemy import and_
+
+In [30]: User.query.filter(nda^Z^Z^ZnUser.name=!"zs",UsUse)).all()
+  File "<ipython-input-30-e8029cf76ee7>", line 1
+    User.query.filter(ndanUser.name=!"zs",UsUse)).all()
+                         ^
+SyntaxError: invalid syntax
+
+
+In [31]: User.query.filter(and_(User.name!="zs",User.phone.endswith('5'))).all
+Out[31]: <bound method Query.all of <flask_sqlalchemy.BaseQuery object at 0x000001BFF1F5FCC0>>
+
+In [32]: User.query.filter(and_(User.name!="zs",User.phone.endswith('5'))).all()
+Out[32]: []
+
+In [33]: User.query.filter(and_(User.name="zs",User.phone.endswith('5'))).all()
+  File "<ipython-input-33-f1e1a10d8208>", line 1
+    User.query.filter(and_(User.name="zs",User.phone.endswith('5'))).all()
+                          ^
+SyntaxError: keyword can't be an expression
+
+
+In [34]: User.query.filter(and_(User.name="zs",User.phone.endswith('5'))).all()
+  File "<ipython-input-34-f1e1a10d8208>", line 1
+    User.query.filter(and_(User.name="zs",User.phone.endswith('5'))).all()
+                          ^
+SyntaxError: keyword can't be an expression
+
+
+In [35]: User.query.filter(and_(User.name=="zs",User.phone.endswith('5'))).all()
+Out[35]: [User object:name=zs]
+
+In [36]: from sqlalchemy import  not_
+
+In [37]: User.query.filter(not_(User.name=="zs")).all()
+Out[37]: [User object:name=lisi, User object:name=chen, User object:name=wang]
+
+In [38]: from sqlalchemy import or_
+
+In [39]: User.query.filter(or_(User.name!="zs",User.phone.endswith('5'))).all()
+Out[39]:
+[User object:name=zs,
+ User object:name=lisi,
+ User object:name=chen,
+ User object:name=wang]
+
+In [40]: li=User.query.offset(2).all()
+
+In [41]: li
+Out[41]: [User object:name=chen, User object:name=wang]
+
+In [42]: li[0].name
+Out[42]: 'chen'
+
+In [43]: li=User.query.offset(1).limit(2).all()
+
+In [44]: li
+Out[44]: [User object:name=lisi, User object:name=chen]
+
+In [45]: li[0].name
+Out[45]: 'lisi'
+
+In [46]: li=User.query.order_by(User.id.desc()).all()
+
+In [47]: li
+Out[47]:
+[User object:name=wang,
+ User object:name=chen,
+ User object:name=lisi,
+ User object:name=zs]
+
+In [48]: from sqlalchemy im
+  File "<ipython-input-48-96aeb210f040>", line 1
+    from sqlalchemy im
+                     ^
+SyntaxError: invalid syntax
+
+
+In [49]: from sqlalchemy import func
+
+In [50]: db.session.query(User.role_id,func.count(User.role_id)).group_by(User.role_id)
+Out[50]: <flask_sqlalchemy.BaseQuery at 0x1bff1f9fd68>
+
+In [51]: db.session.query(User.role_id,func.count(User.role_id)).group_by(User.role_id).all()
+Out[51]: [(1, 2), (2, 2)]
+
+In [52]: db.session.query(User.role_id,User.name,func.count(User.role_id)).group_by(User.role_id).all()
+Out[52]: [(1, 'zs', 2), (2, 'lisi', 2)]
+
+In [53]: ro=Role.query.get(1)
+
+In [54]: ro.users
+Out[54]: [User object:name=zs, User object:name=chen]
+
+In [55]: ro.users[0].name
+Out[55]: 'zs'
+
+In [56]: ro.users[1].name
+Out[56]: 'chen'
+
+In [57]: user
+
+In [58]: user.role_id
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-58-3fc06a1d2c06> in <module>()
+----> 1 user.role_id
+
+AttributeError: 'NoneType' object has no attribute 'role_id'
+
+In [59]: User.query.filter_by(name="zs").update({"name":"java","phone":"23456"})
+Out[59]: 1
+
+In [60]: db.session.commit()
+
+In [61]: user=User.query.get(4)
+
+In [62]: db.session.delete(user)
+
+In [63]: db.session.commit()
+

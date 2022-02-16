@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+	    <style>
+	    	.ppps{
+	    		color: blueviolet;
+	    	}
+	    </style>
+	    <script>
+	    	$(function(){
+	    		$("#btns").click(function(){
+	    			
+	    			$("#pid").addClass("ppps")
+	    		})
+	    		$("#btnd").click(function(){
+	    			
+	    			$("#pid").removeClass("ppps")
+	    		})
+	    		$("#btnds").click(function(){
+	    			
+	    			$("#pids").css("background-color","aqua")
+	    		})
+	    	})
+	    </script>
+	 </head>
+	<body>
+		<input type="button" id="btns" value="添加样式" />
+		<input type="button" id="btnd" value="删除样式" />
+		<input type="button" id="btnds" value="设置样式" />
+		<p id="pid">添加样式的</p>
+		<p id="pids">添加样式的</p>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+#p1{
+	
+	text-align: right;
+}
+h1{
+	text-align: center;
+	text-decoration: overline;
+}
+h2{
+	text-align: center;
+	text-decoration: line-through;
+}
+h3{
+	text-align: center;
+	text-decoration: underline;
+}
+#p2{
+	text-indent: 50px;
+}
+a{
+	text-decoration: none;
+}

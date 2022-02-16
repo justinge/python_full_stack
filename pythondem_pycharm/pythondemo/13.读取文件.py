@@ -1,0 +1,10 @@
+file=open("test.md")#打开文件
+#读取文件内容
+text=file.read()
+print(text)
+print(len(text))
+text=file.read()
+print(text)
+print(len(text))
+#关闭文件
+file.close()
